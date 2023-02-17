@@ -1,14 +1,17 @@
 import { useEffect } from "react";
 import { Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 export const NotFound = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
+    dispatch({ type: "CHANGE_CITY", payload: { name: "Milazzo" } });
     setTimeout(() => {
       navigate("/");
-    }, 3000);
+    }, 5000);
   }, []);
 
   return (
