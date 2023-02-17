@@ -16,7 +16,7 @@ export const HourlyForecast = () => {
             <img src={`http://openweathermap.org/img/wn/${event.weather[0].icon}.png`} />{" "}
             <span className="fw-bold">{event.main.temp.toFixed(0)}°</span>
           </Col>
-          <Col className="mintext">
+          <Col className="mintext d-none d-lg-block">
             <BsArrowDownUp /> <span style={{ color: "red" }}>{event.main.temp_min.toFixed(0)}°</span> -{" "}
             <span style={{ color: "green" }}> {event.main.temp_max.toFixed(0)}° </span>
           </Col>

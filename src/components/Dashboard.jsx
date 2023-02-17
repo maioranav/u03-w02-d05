@@ -72,7 +72,7 @@ export const Dashboard = () => {
         <Row>
           <h2 className="mb-4">{cityloc.name} - Weather and Forecast DashBoard</h2>
         </Row>
-        <Row className="d-flex justify-content-between mb-5">
+        <Row className="d-flex justify-content-center justify-content-md-between mb-5">
           {current.weather && <CurrentWeather />}
           {current.weather && <HourlyForecast />}
         </Row>
