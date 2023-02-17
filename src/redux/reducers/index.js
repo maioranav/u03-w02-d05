@@ -4,7 +4,8 @@ const initialState = {
    city: { name: "Milazzo", lat: 0, lon: 0 },
    current: {},
    hourly: [],
-   daily: []
+   daily: [],
+   isLoading: false
 }
 
 const mainReducer = (state = initialState, action) => {
@@ -25,6 +26,8 @@ const mainReducer = (state = initialState, action) => {
          return state = { ...state, hourly: action.payload }
       case "SAVE_DAILY":
          return state = { ...state, daily: action.payload }
+      case "LOADTOGGLE":
+         return state = { ...state, isLoading: action.payload }
       default:
          return state;
    }

@@ -1,9 +1,10 @@
-import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
+import { Button, Container, Form, Nav, Navbar, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export const CustNav = () => {
   const dispatch = useDispatch();
+  const loader = useSelector((state) => state.isLoading);
 
   return (
     <Navbar expand="lg" className="navpadding">
@@ -18,6 +19,7 @@ export const CustNav = () => {
               Home
             </Link>
           </Nav>
+          {loader && <Spinner animation="border" className="d-none d-lg-block mx-3" />}
           <Form
             className="d-flex"
             onSubmit={(event) => {

@@ -22,7 +22,7 @@ export const Dashboard = () => {
       let currentWeather = await queryWeather.json();
       dispatch({ type: "SAVE_CURRENT", payload: currentWeather });
     } catch (e) {
-      errorpage("/catcherror");
+      errorpage("/catcherrorcurrent");
     }
     //SET HOURLY FORECAST
     try {
@@ -32,7 +32,7 @@ export const Dashboard = () => {
       let hourlyFC = await queryFCHourly.json();
       dispatch({ type: "SAVE_3HFORE", payload: hourlyFC.list });
     } catch (e) {
-      errorpage("/catcherror");
+      errorpage("/catcherrorhourly");
     }
     //SET DAILY FORECAST
     try {
@@ -48,11 +48,13 @@ export const Dashboard = () => {
       });
       dispatch({ type: "SAVE_DAILY", payload: dailyArray });
     } catch (e) {
-      errorpage("/catcherror");
+      errorpage("/catcherrordaily");
     }
+    dispatch({ type: "LOADTOGGLE", payload: false });
   };
 
   const fetchByCity = async (city) => {
+    dispatch({ type: "LOADTOGGLE", payload: true });
     try {
       let geo = await fetch(`${process.env.REACT_APP_OWAPIGEOLOC}?&appid=${process.env.REACT_APP_OWAPIKEY}&q=${city}`);
       let coord = await geo.json();

@@ -8,6 +8,7 @@ export const NotFound = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    dispatch({ type: "LOADTOGGLE", payload: false });
     dispatch({ type: "CHANGE_CITY", payload: { name: "Milazzo" } });
     setTimeout(() => {
       navigate("/");
