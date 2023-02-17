@@ -6,7 +6,7 @@ export const CurrentWeather = () => {
   const current = useSelector((state) => state.current);
 
   return (
-    <Col xs={10} md={5} className="glass p-4">
+    <Col xs={10} md={5} className="glass p-4 currentmobile">
       <Row>
         <h3>Current Weather</h3>
       </Row>
