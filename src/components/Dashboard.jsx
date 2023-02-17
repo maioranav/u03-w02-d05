@@ -33,6 +33,22 @@ export const Dashboard = () => {
     } catch (e) {
       errorpage("/catcherror");
     }
+    //SET DAILY FORECAST
+    try {
+      let queryDaily = await fetch(
+        `${process.env.REACT_APP_OWAPIHOURS}?&appid=${process.env.REACT_APP_OWAPIKEY}&units=metric&lat=${lat.toFixed(2)}&lon=${lon.toFixed(2)}`
+      );
+      let { list: dailyFC } = await queryDaily.json();
+      let dailyArray = dailyFC.filter((event) => {
+        let hours = new Date(event.dt_txt).getHours();
+        if (hours === 0) {
+          return event;
+        }
+      });
+      dispatch({ type: "SAVE_DAILY", payload: dailyArray });
+    } catch (e) {
+      errorpage("/catcherror");
+    }
   };
 
   const fetchByCity = async (city) => {
