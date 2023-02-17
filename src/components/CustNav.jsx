@@ -1,11 +1,13 @@
 import { Button, Container, Form, Nav, Navbar, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 export const CustNav = () => {
   const dispatch = useDispatch();
   const loader = useSelector((state) => state.isLoading);
   const favs = useSelector((state) => state.favs);
+  const location = useLocation();
 
   return (
     <Navbar expand="lg" className="navpadding">
@@ -24,18 +26,20 @@ export const CustNav = () => {
             </Link>
           </Nav>
           {loader && <Spinner animation="border" className="d-none d-lg-block mx-3" />}
-          <Form
-            className="d-flex"
-            onSubmit={(event) => {
-              event.preventDefault();
-              dispatch({ type: "CHANGE_CITY", payload: { name: event.target[0].value } });
-            }}
-          >
-            <Form.Control type="search" placeholder="City..." className="me-2" aria-label="Search" />
-            <Button variant="primary" type="submit">
-              Search
-            </Button>
-          </Form>
+          {location.pathname === "/" && (
+            <Form
+              className="d-flex"
+              onSubmit={(event) => {
+                event.preventDefault();
+                dispatch({ type: "CHANGE_CITY", payload: { name: event.target[0].value } });
+              }}
+            >
+              <Form.Control type="search" placeholder="City..." className="me-2" aria-label="Search" />
+              <Button variant="primary" type="submit">
+                Search
+              </Button>
+            </Form>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
