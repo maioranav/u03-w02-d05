@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { CurrentWeather } from "./CurrentWeather";
 
 export const Dashboard = () => {
   const errorpage = useNavigate();
@@ -13,7 +14,7 @@ export const Dashboard = () => {
     dispatch({ type: "CHANGE_CITY", payload: { name: city, lat, lon } });
     try {
       let queryWeather = await fetch(
-        `${process.env.REACT_APP_OWAPICURRENT}?&appid=${process.env.REACT_APP_OWAPIKEY}&lat=${lat.toFixed(2)}&lon=${lon.toFixed(2)}`
+        `${process.env.REACT_APP_OWAPICURRENT}?&appid=${process.env.REACT_APP_OWAPIKEY}&units=metric&lat=${lat.toFixed(2)}&lon=${lon.toFixed(2)}`
       );
       let currentWeather = await queryWeather.json();
       dispatch({ type: "SAVE_CURRENT", payload: currentWeather });
@@ -41,9 +42,11 @@ export const Dashboard = () => {
     <>
       <Container>
         <Row>
-          <h2>{city} - Weather and Forecast DashBoard</h2>
+          <h2 className="mb-4">{city} - Weather and Forecast DashBoard</h2>
         </Row>
-        <Row></Row>
+        <Row>
+          <CurrentWeather />
+        </Row>
       </Container>
     </>
   );

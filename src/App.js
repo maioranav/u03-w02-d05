@@ -15,6 +15,7 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/weather/:city" element={<Dashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
 
