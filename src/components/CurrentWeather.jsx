@@ -8,12 +8,12 @@ export const CurrentWeather = () => {
   return (
     <Col xs={10} md={5} className="glass p-4 currentmobile">
       <Row>
-        <h3>Current Weather</h3>
+        <h3 className="testombra">Current Weather</h3>
       </Row>
       <Row>
         <p className="display-1 fw-bold">
-          <img src={`http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`} style={{ width: "100px" }} /> {current.main.temp.toFixed(0)}
-          °
+          <img src={`http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`} style={{ width: "100px" }} />{" "}
+          <span className="testombra">{current.main.temp.toFixed(0)}°</span>
         </p>
         <p>{current.weather[0].description}</p>
       </Row>

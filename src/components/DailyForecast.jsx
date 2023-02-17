@@ -8,13 +8,13 @@ export const DailyForecast = () => {
   return (
     <Col className="glass p-4 d-flex flex-column justify-content-between">
       <Row>
-        <h3>5 Days Forecast</h3>
+        <h3 className="testombra">5 Days Forecast</h3>
       </Row>
       <Row className="d-flex justify-content-between">
         {daily.map((event) => (
           <Col xs={6} md={4} lg={2} key={`daily${event.dt}`} className="d-flex flex-column align-items-center">
             <img src={`http://openweathermap.org/img/wn/${event.weather[0].icon}@2x.png`} style={{ width: "75px" }} />
-            <p className="fw-bold">{event.main.temp.toFixed(0)}°</p>
+            <p className="fw-bold testombra">{event.main.temp.toFixed(0)}°</p>
             <p className="mintext">
               <BsArrowDownUp /> <span style={{ color: "red" }}>{event.main.temp_min.toFixed(0)}°</span> -{" "}
               <span style={{ color: "green" }}> {event.main.temp_max.toFixed(0)}° </span>
