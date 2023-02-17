@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 export const CustNav = () => {
   const dispatch = useDispatch();
   const loader = useSelector((state) => state.isLoading);
+  const favs = useSelector((state) => state.favs);
 
   return (
     <Navbar expand="lg" className="navpadding">
@@ -17,6 +18,9 @@ export const CustNav = () => {
           <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
             <Link to="/" className="nav-link">
               Home
+            </Link>
+            <Link to="/favs" className="nav-link">
+              Favs ({favs.length})
             </Link>
           </Nav>
           {loader && <Spinner animation="border" className="d-none d-lg-block mx-3" />}

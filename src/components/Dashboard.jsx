@@ -1,15 +1,18 @@
 import { useEffect } from "react";
 import { Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CurrentWeather } from "./CurrentWeather";
 import { DailyForecast } from "./DailyForecast";
 import { HourlyForecast } from "./HourlyForecast";
+import { AiOutlineHeart } from "react-icons/ai";
 
 export const Dashboard = () => {
   const errorpage = useNavigate();
   const dispatch = useDispatch();
   const cityloc = useSelector((state) => state.city);
+  const params = useParams();
+
   const current = useSelector((state) => state.current);
 
   const fetchByLoc = async (city, lat, lon) => {
@@ -65,14 +68,22 @@ export const Dashboard = () => {
   };
 
   useEffect(() => {
-    fetchByCity(cityloc.name);
+    let citytofetch = params.city ? params.city : cityloc.name;
+    fetchByCity(citytofetch);
   }, [cityloc.name]);
 
   return (
     <>
       <Container>
         <Row>
-          <h2 className="mb-4">{cityloc.name} - Weather and Forecast DashBoard</h2>
+          <h2 className="mb-4">
+            {cityloc.name}{" "}
+            <AiOutlineHeart
+              onClick={() => {
+                dispatch({ type: "ADD_FAV", payload: cityloc.name });
+              }}
+            />
+          </h2>
         </Row>
         <Row className="d-flex justify-content-center justify-content-md-between mb-5">
           {current.weather && <CurrentWeather />}
