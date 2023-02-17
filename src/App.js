@@ -2,6 +2,7 @@ import { Container } from 'react-bootstrap';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import { CustNav } from './components/CustNav';
+import { Dashboard } from './components/Dashboard';
 import { NotFound } from './components/NotFound';
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
         <Container>
 
           <Routes>
-            <Route path="/" element="" />
+            <Route path="/" element={<Dashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
 
