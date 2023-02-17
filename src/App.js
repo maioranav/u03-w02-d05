@@ -2,6 +2,7 @@ import { Container } from 'react-bootstrap';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import { CustNav } from './components/CustNav';
+import { CustFooter } from './components/CustFooter';
 import { Dashboard } from './components/Dashboard';
 import { Favs } from './components/Favs';
 import { NotFound } from './components/NotFound';
@@ -22,7 +23,7 @@ function App() {
           </Routes>
 
         </Container>
-
+        <CustFooter />
       </BrowserRouter>
     </div>
   );
