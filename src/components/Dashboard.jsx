@@ -3,6 +3,7 @@ import { Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { CurrentWeather } from "./CurrentWeather";
+import { DailyForecast } from "./DailyForecast";
 import { HourlyForecast } from "./HourlyForecast";
 
 export const Dashboard = () => {
@@ -41,7 +42,7 @@ export const Dashboard = () => {
       let { list: dailyFC } = await queryDaily.json();
       let dailyArray = dailyFC.filter((event) => {
         let hours = new Date(event.dt_txt).getHours();
-        if (hours === 0) {
+        if (hours === 12) {
           return event;
         }
       });
@@ -71,10 +72,11 @@ export const Dashboard = () => {
         <Row>
           <h2 className="mb-4">{cityloc.name} - Weather and Forecast DashBoard</h2>
         </Row>
-        <Row className="d-flex justify-content-between">
+        <Row className="d-flex justify-content-between mb-5">
           {current.weather && <CurrentWeather />}
           {current.weather && <HourlyForecast />}
         </Row>
+        <Row>{current.weather && <DailyForecast />}</Row>
       </Container>
     </>
   );

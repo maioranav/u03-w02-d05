@@ -13,9 +13,10 @@ export const HourlyForecast = () => {
       {hourly.map((event) => (
         <Row key={`hourly${event.dt}`} className="d-flex align-items-center">
           <Col>
-            <img src={`http://openweathermap.org/img/w/${event.weather[0].icon}.png`} />
+            <img src={`http://openweathermap.org/img/wn/${event.weather[0].icon}.png`} />{" "}
+            <span className="fw-bold">{event.main.temp.toFixed(0)}°</span>
           </Col>
-          <Col>
+          <Col className="mintext">
             <BsArrowDownUp /> <span style={{ color: "red" }}>{event.main.temp_min.toFixed(0)}°</span> -{" "}
             <span style={{ color: "green" }}> {event.main.temp_max.toFixed(0)}° </span>
           </Col>

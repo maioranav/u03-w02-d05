@@ -12,7 +12,8 @@ export const CurrentWeather = () => {
       </Row>
       <Row>
         <p className="display-1 fw-bold">
-          <img src={`http://openweathermap.org/img/w/${current.weather[0].icon}.png`} style={{ width: "75px" }} /> {current.main.temp.toFixed(0)}°
+          <img src={`http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`} style={{ width: "100px" }} /> {current.main.temp.toFixed(0)}
+          °
         </p>
         <p>{current.weather[0].description}</p>
       </Row>
