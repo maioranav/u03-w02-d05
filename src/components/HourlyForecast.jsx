@@ -5,6 +5,10 @@ import { useSelector } from "react-redux";
 export const HourlyForecast = () => {
   const hourly = useSelector((state) => state.hourly);
 
+  function addLeadingZero(n) {
+    return (n < 10 ? "0" : "") + n;
+  }
+
   return (
     <Col xs={10} md={5} className="glass p-4 d-flex flex-column justify-content-between">
       <Row>
@@ -24,7 +28,7 @@ export const HourlyForecast = () => {
             <p className="minmax mb-0">
               <BsCalendarEvent />
               &nbsp;
-              {new Date(event.dt_txt).getHours()}.00
+              {addLeadingZero(new Date(event.dt_txt).getHours())}:00
             </p>
           </Col>
         </Row>
