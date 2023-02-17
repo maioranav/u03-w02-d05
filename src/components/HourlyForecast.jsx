@@ -11,7 +11,7 @@ export const HourlyForecast = () => {
         <h3>3Hrs Forecast</h3>
       </Row>
       {hourly.map((event) => (
-        <Row className="d-flex align-items-center">
+        <Row key={`hourly${event.dt}`} className="d-flex align-items-center">
           <Col>
             <img src={`http://openweathermap.org/img/w/${event.weather[0].icon}.png`} />
           </Col>
