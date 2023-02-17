@@ -11,8 +11,10 @@ const mainReducer = (state = initialState, action) => {
    //eseguo qualcosa per ogni azione.tipo del reducer interpellato
 
    switch (action.type) {
-      case "CHANGE_CITY":
+      case "CHANGE_LOC":
          return state = { ...state, city: { name: action.payload.name, lat: action.payload.lat, lon: action.payload.lon } }
+      case "CHANGE_CITY":
+         return state = { ...state, city: { ...state.city, name: action.payload.name } }
       case "ADD_CITY":
          return state = { ...state, favs: [...state.favs, action.payload.name] }
       case "SAVE_CURRENT":

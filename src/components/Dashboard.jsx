@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -8,10 +8,10 @@ export const Dashboard = () => {
   const errorpage = useNavigate();
   const dispatch = useDispatch();
   const cityloc = useSelector((state) => state.city);
-  const [city, setCity] = useState(cityloc.name);
+  const current = useSelector((state) => state.current);
 
   const fetchByLoc = async (city, lat, lon) => {
-    dispatch({ type: "CHANGE_CITY", payload: { name: city, lat, lon } });
+    dispatch({ type: "CHANGE_LOC", payload: { name: city, lat, lon } });
     try {
       let queryWeather = await fetch(
         `${process.env.REACT_APP_OWAPICURRENT}?&appid=${process.env.REACT_APP_OWAPIKEY}&units=metric&lat=${lat.toFixed(2)}&lon=${lon.toFixed(2)}`
@@ -27,7 +27,6 @@ export const Dashboard = () => {
     try {
       let geo = await fetch(`${process.env.REACT_APP_OWAPIGEOLOC}?&appid=${process.env.REACT_APP_OWAPIKEY}&q=${city}`);
       let coord = await geo.json();
-      // coord.length > 0 ? dispatch({ type: "CHANGE_CITY", payload: { name: city, lat: coord[0].lat, lon: coord[0].lon } }) : errorpage("/notfound");
       coord.length > 0 ? await fetchByLoc(city, coord[0].lat, coord[0].lon) : errorpage("/notfound");
     } catch (e) {
       errorpage("/catcherror");
@@ -35,18 +34,16 @@ export const Dashboard = () => {
   };
 
   useEffect(() => {
-    fetchByCity(city);
-  }, [city]);
+    fetchByCity(cityloc.name);
+  }, [cityloc.name]);
 
   return (
     <>
       <Container>
         <Row>
-          <h2 className="mb-4">{city} - Weather and Forecast DashBoard</h2>
+          <h2 className="mb-4">{cityloc.name} - Weather and Forecast DashBoard</h2>
         </Row>
-        <Row>
-          <CurrentWeather />
-        </Row>
+        <Row>{current.weather && <CurrentWeather />}</Row>
       </Container>
     </>
   );

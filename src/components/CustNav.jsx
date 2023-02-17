@@ -1,7 +1,10 @@
 import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 export const CustNav = () => {
+  const dispatch = useDispatch();
+
   return (
     <Navbar expand="lg" className="navpadding">
       <Container className="glass">
@@ -15,9 +18,17 @@ export const CustNav = () => {
               Home
             </Link>
           </Nav>
-          <Form className="d-flex">
+          <Form
+            className="d-flex"
+            onSubmit={(event) => {
+              event.preventDefault();
+              dispatch({ type: "CHANGE_CITY", payload: { name: event.target[0].value } });
+            }}
+          >
             <Form.Control type="search" placeholder="City..." className="me-2" aria-label="Search" />
-            <Button variant="primary">Search</Button>
+            <Button variant="primary" type="submit">
+              Search
+            </Button>
           </Form>
         </Navbar.Collapse>
       </Container>
